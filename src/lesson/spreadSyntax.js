@@ -29,7 +29,7 @@ const packageManager = ['npm', 'yarn', 'pnpm'];
 
 function arrayFn(array) {
   const framework = ['Vue', 'React', 'Svelte'];
-  const margedStr = [...packageManager, ...framework]
+  const margedStr = [...array, ...framework]
   return margedStr
 }
 

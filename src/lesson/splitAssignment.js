@@ -25,7 +25,8 @@ console.log(strReact);
 
 // 問題 2
 function objectFn(object) {
-  console.log(object);
+  const { name: objectName } = object;
+  console.log(objectName);
 }
 
 const argObject = {
@@ -33,6 +34,4 @@ const argObject = {
   place: 'Shibuya',
 };
 
-const { name: companyName } = argObject;
-
-objectFn(companyName);
+objectFn(argObject);

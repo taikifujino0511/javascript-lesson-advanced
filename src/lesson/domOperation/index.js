@@ -9,15 +9,18 @@ const eventTypeCard = document.querySelector('.card-type--yellow');
 
 button.addEventListener('click', () => {
   title.classList.add('animate__hinge');
-  nodeTypeCard.classList.add('card-animation');
-  eventTypeCard.style.display = 'block'
-  eventTypeCard.classList.add('animate__fadeInUp');
+
+  // 初期化
+  nodeTypeCard.classList.remove('card-animation');
+  eventTypeCard.style.display = 'none';
+  eventTypeCard.classList.remove('animate__fadeInUp');
 
   setTimeout(() => {
     title.classList.remove('animate__hinge');
-    nodeTypeCard.classList.remove('card-animation');
-    eventTypeCard.style.display = 'none'
-    eventTypeCard.classList.remove('animate__fadeInUp');
+    
+    eventTypeCard.style.display = 'block';
+    nodeTypeCard.classList.add('card-animation');
+    eventTypeCard.classList.add('animate__fadeInUp');
   }, 2000);
 });
 

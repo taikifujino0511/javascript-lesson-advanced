@@ -25,8 +25,7 @@ console.log(strReact);
 
 // 問題 2
 function objectFn(object) {
-  const { name: objectName } = object;
-  console.log(objectName);
+  console.log(object.name);
 }
 
 const argObject = {

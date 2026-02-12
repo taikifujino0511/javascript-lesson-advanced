@@ -10,9 +10,9 @@ window.addEventListener('DOMContentLoaded', () => {
   $axios(pokeListURL).then(async (resList) => {
     const pokeList = resList.data.results;
     for (const poke of pokeList) { // 順番を担保するためのfor
-      await $axios(poke.url).then((resDetail) => {
+      await $axios(poke.url).then(async (resDetail) => {
         const pokeDetail = resDetail.data;
-        $axios(pokeDetail.species.url).then((resTransratedName) => {
+        await $axios(pokeDetail.species.url).then((resTransratedName) => {
           const TransratedPokeName = resTransratedName.data.names[0].name;
           const pokeElement = createElements(
             `

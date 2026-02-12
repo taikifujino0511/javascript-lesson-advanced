@@ -6,24 +6,25 @@ window.addEventListener('DOMContentLoaded', () => {
   // ここに処理を書いていく
   const listElement = document.getElementById('list');
   const pokeListURL = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  $axios(pokeListURL).then(resList =>{
+  const pokeElements = document.createDocumentFragment() // 空のフラグメントを作成
+  $axios(pokeListURL).then(async (resList) => {
     const pokeList = resList.data.results;
-    pokeList.forEach(poke => {
-      $axios(poke.url).then((resDetail) => {
+    for (const poke of pokeList) { // 順番を担保するためのfor
+      await $axios(poke.url).then((resDetail) => {
         const pokeDetail = resDetail.data;
         $axios(pokeDetail.species.url).then((resTransratedName) => {
-          const TransratetPokeName = resTransratedName.data.names[0].name;
+          const TransratedPokeName = resTransratedName.data.names[0].name;
           const pokeElement = createElements(
             `
             <li class="list-item">
               <div class="character">
                 <img src="${pokeDetail.sprites.other['official-artwork'].front_default}" width="475" height="475" alt="" class="character__img">
               </div>
-              <p class="character__name">${TransratetPokeName}</p>
+              <p class="character__name">${TransratedPokeName}</p>
             </li>
             `
           );
-          listElement.appendChild(pokeElement);
+          pokeElements.appendChild(pokeElement); // 親フラグメントにフラグメントを追加
         }).catch(e => {
           console.log(e);
           listElement.appendChild(createErrorElement(e));
@@ -32,7 +33,8 @@ window.addEventListener('DOMContentLoaded', () => {
         console.log(e);
         listElement.appendChild(createErrorElement(e));
       });
-    });
+    };
+    listElement.appendChild(pokeElements); // forの後でListに追加
   }).catch(e => {
     console.log(e);
     listElement.appendChild(createErrorElement(e));

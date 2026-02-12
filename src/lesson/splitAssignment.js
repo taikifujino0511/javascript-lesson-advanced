@@ -24,8 +24,8 @@ const [strjQuery, strVue, strReact] = arrayFn('react');
 console.log(strReact);
 
 // 問題 2
-function objectFn(object) {
-  console.log(object.name);
+function objectFn({name: companyName}) {
+  console.log(companyName);
 }
 
 const argObject = {
